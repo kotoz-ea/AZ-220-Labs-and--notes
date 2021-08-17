@@ -1,0 +1,3 @@
+# My notes about [Lab 01: Getting Started with Azure](https://microsoftlearning.github.io/AZ-220-Microsoft-Azure-IoT-Developer/Instructions/Labs/LAB_AK_01-getting-started-with-azure.html)
+- Each resource in azure portal called blade, opening new blades to the right as you drill deeper and deeper into a service. 
+- A resource group in azure is a logical group that contains related resources for a project or application.
