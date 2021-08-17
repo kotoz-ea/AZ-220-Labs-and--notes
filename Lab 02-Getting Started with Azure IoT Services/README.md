@@ -53,14 +53,55 @@
                 - Service Bus Queues
                 - Service Bus Topics
 
-    - ## Access control and permissions
-        - IoT Hub uses permissions to grant access to each IoT hub endpoint. Permissions limit the access to an IoT hub based on functionality.
+- ## Access control and permissions
+    - IoT Hub uses permissions to grant access to each IoT hub endpoint. Permissions limit the access to an IoT hub based on functionality.
     
-    - ## Device Identity and Registration
-        - Every IoT hub has an identity registry that stores information about the devices permitted to connect to the IoT hub.
-        - Before a device can connect to an IoT hub, there must be an entry for that device in the IoT hub's identity registry.
-        - A device must also authenticate with the IoT hub based on credentials stored in the identity registry.
-        
+- ## Device Identity and Registration
+    - Every IoT hub has an identity registry that stores information about the devices permitted to connect to the IoT hub.
+    - Before a device can connect to an IoT hub, there must be an entry for that device in the IoT hub's identity registry.
+    - A device must also authenticate with the IoT hub based on credentials stored in the identity registry.
+
+- ### Module Identity
+    - In IoT Hub, **under each device identity, you can create up to 20 module identities**.
+    - Each module identity implicitly generates a module twin, module twins are JSON documents that store module state information including metadata, configurations, and conditions.
+    - On the device side, the IoT Hub device SDKs enable you to create modules where each one opens an independent connection to IoT Hub.
+    - This functionality enables you to use separate namespaces for different components on your device. For example, you have a vending machine that has three different sensors. Each sensor is controlled by different departments in your company. 
+    - You can create a module for each sensor. This way, each department is only able to send jobs or direct methods to the sensor that they control, avoiding conflicts and user errors
+- ## Intro to Device twins
+    - Device twins are JSON documents that store device state information including metadata, configurations, and conditions.  
+    - Device twins enable synchronizing desired configuration from the cloud and for reporting current configuration and device properties. 
+    - The lifecycle of a device twin is linked to the corresponding device identity. Device twins are implicitly created and deleted when a device identity is created or deleted in IoT Hub.
+    - Device twins store device-related information that:
+        - Device and back ends can use to synchronize device conditions and configuration.
+        - The solution back end can use to query and target long-running operations.
+    - A device twin is a JSON document that includes
+        - **Tags**. A section of the JSON document that the solution back end can read from and write to. Tags are not visible to device apps.
+        - Desired properties. Used along with reported properties to synchronize device configuration or conditions. 
+        - The solution back end can set desired properties, and the device app can read them. The device app can also receive notifications of changes in the desired properties.
+        -  The device app can set reported properties, and the solution back end can read and query them
+        - ### Use device twins to:
+            - Store device-specific metadata in the cloud. For example, the deployment location of a vending machine.
+            - Report current state information such as available capabilities and conditions from your device app. For example, a device is connected to your IoT hub over cellular or WiFi.
+            - Synchronize the state of long-running workflows between device app and back-end app. For example, when the solution back end specifies the new firmware version to install, and the device app reports the various stages of the update process.
+            - Query your device metadata, configuration, or state.
+- ## Azure IoT SDKs
+    - **IoT Hub Device SDKs** enable you to build apps that run on your IoT devices using device client or module client.
+    - These apps send telemetry to your IoT hub, and optionally receive messages, job, method, or twin updates from your IoT hub.
+    - **IoT Hub Service SDKs** enable you to build backend applications to manage your IoT hub, and optionally send messages, schedule jobs, invoke direct methods, or send desired property updates to your IoT devices or modules.
+
+- ## Device Configuration and Communication
+    - IoT Hub allows for bi-directional communication with your devices.
+    - Use IoT Hub messaging to communicate with your devices by sending messages from your devices to your solutions back end and sending commands from your IoT solutions back end to your devices.
+    - **Device-to-Cloud Communications**
+        When sending information from the device app to the solution back end, IoT Hub exposes three options:
+        - Each Device-to-cloud messages for time series telemetry and alerts.
+        - Each Device twin's reported properties for reporting device state information such as available capabilities, conditions, or the state of long-running workflows. For example, configuration and software updates.
+        - Each File uploads for media files and large telemetry batches uploaded by intermittently connected devices or compressed to save bandwidth.
+    - **Cloud-to-Device Communications**
+        IoT Hub provides three options for communicating to a device from a back-end app:
+        - Direct methods for communications that require immediate confirmation of the result. Direct methods are often used for interactive control of devices such as turning on a fan.
+        - Twin's desired properties for long-running commands intended to put the device into a certain desired state. For example, set the telemetry send interval to 30 minutes.
+        - Cloud-to-device messages for one-way notifications to the device app    
 
 
 - The value that you apply to IoT hub name must be unique across all of Azure. This is true because the value assigned to the name will be used in the IoT Hub’s connection string. Since Azure enables you to connect devices from anywhere in the world to your hub, it makes sense that all Azure IoT hubs must be accessible from the Internet using the connection string and that connection strings must therefore be unique.
