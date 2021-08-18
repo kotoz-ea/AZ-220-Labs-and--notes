@@ -1,4 +1,12 @@
 # [Getting Started with Azure IoT Services](https://microsoftlearning.github.io/AZ-220-Microsoft-Azure-IoT-Developer/Instructions/Labs/LAB_AK_02-getting-started-with-azure-iot-services.html)
+
+## TODO
+- [X] Azure IOT Hub Concepts.
+    - [X] Devices and Device Communication
+    - [X] Device Configuration and Communication
+- [ ] Azure IOT Edge  
+    - [ ] Azure IoT Edge Deployment Process
+
 - ## IOTHub Endpoints
     - Azure IoT Hub is a multi-tenant service that provides access to its functionality using a combination of built-in and custom endpoints.
     - **Builtin Endpoints**
@@ -112,5 +120,38 @@
     - The IoT Hub Device Provisioning Service is a helper service for IoT Hub that enables zero-touch, just-in-time provisioning to the right IoT hub without requiring human intervention, *enabling customers to provision millions of devices in a secure and scalable manner*.
     - The Device Provisioning Service can only provision devices to IoT hubs that have been linked to it. Linking an IoT hub to an instance of the Device Provisioning service gives the service read/write permissions to the IoT hub’s device registry; with the link, a Device Provisioning service can register a device ID and set the initial configuration in the device twin.
     - Enrollment groups can be used for a large number of devices that share a desired initial configuration, or for devices all going to the same tenant.
-- 
+
+
+
+## Azure IoT Edge Deployment Process
+### What is azure iot edge?
+Azure IoT Edge moves cloud analytics and custom business logic to devices so that your organization can focus on business insights instead of data management.
+## Azure IoT Edge is made up of three components:
+- IoT Edge modules are containers that run Azure services, third-party services, or your own code. Modules are deployed to IoT Edge devices and execute locally on those devices.
+    - IoT Edge modules are units of execution, implemented as Docker compatible containers, that run your business logic at the edge.
+    - Multiple modules can be configured to communicate with each other, creating a pipeline of data processing.
+    - Azure IoT Edge allows you to deploy complex event processing, machine learning, image recognition, and other high value AI without writing it in-house. Azure services like Azure Functions, Azure Stream Analytics, and Azure Machine Learning can all be run on-premises via Azure IoT Edge.
+- The IoT Edge runtime runs on each IoT Edge device and manages the modules deployed to each device.
+    - The runtime sits on the IoT Edge device, and performs management and communication operations.
+- A cloud-based interface enables you to remotely monitor and manage IoT Edge devices.
+
+    - ## IOT Edge Hub
+        - The IoT Edge hub acts as a local proxy for IoT Hub by exposing the same protocol endpoints as IoT Hub.
+        - This means that clients (whether devices or modules) can connect to the IoT Edge runtime just as they would to IoT Hub.
+        - **IoT Edge hub supports clients that connect using MQTT or AMQP. It does not support clients that use HTTP**.
+        - **The IoT Edge hub is not a full version of IoT Hub running locally**
+        - 
+
+## Lab six:Introduction to Azure IoT Edge
+In this lab, you will complete the following activities:
+
+- [X] Verify that the lab prerequisites are met (that you have the required Azure resources)
+- [X] Deploy an Azure IoT Edge Enabled Linux VM
+- [X] Create an IoT Edge Device Identity in IoT Hub using Azure CLI
+- [ ] Connect the IoT Edge Device to IoT Hub
+- [ ] Add an Edge Module to the Edge Device
+- [ ] Deploy Azure Stream Analytics as an IoT Edge Module
+
+        
+
 
